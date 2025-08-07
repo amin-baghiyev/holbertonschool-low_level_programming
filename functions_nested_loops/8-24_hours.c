@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 /**
  * jack_bauer - Prints every minute of the day
@@ -8,27 +7,36 @@
  */
 void jack_bauer(void)
 {
-	short hour, minute;
+	short f_hour, s_hour, f_minute, s_minute;
 
-	hour = 0;
-	minute = 0;
-	while (hour <= 23 && minute <= 59)
+	f_hour = 0;
+	s_hour = 0;
+	f_minute = 0;
+	s_minute = 0;
+	while (!(f_hour == 2 && s_hour == 4))
 	{
-		if (hour <= 9)
-			printf("0%d:", hour);
-		else
-			printf("%d:", hour);
+		_putchar(48 + f_hour);
+		_putchar(48 + s_hour);
+		_putchar(':');
+		_putchar(48 + f_minute);
+		_putchar(48 + s_minute);
+		_putchar('\n');
 
-		if (minute <= 9)
-			printf("0%d\n", minute);
-		else
-			printf("%d\n", minute);
-
-		if (minute == 59 && hour != 23)
+		s_minute++;
+		if (s_minute == 10)
 		{
-			minute = -1;
-			hour++;
+			s_minute = 0;
+			f_minute++;
 		}
-		minute++;
+		if (f_minute == 6)
+		{
+			s_hour++;
+			f_minute = 0;
+		}
+		if (s_hour == 9)
+		{
+			f_hour++;
+			s_hour = 0;
+		}
 	}
 }
