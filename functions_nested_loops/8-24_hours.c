@@ -22,6 +22,11 @@ void jack_bauer(void)
 		_putchar(48 + s_minute);
 		_putchar('\n');
 
+		if (s_hour == 9 && f_minute == 5 && s_minute == 9)
+		{
+			f_hour++;
+			s_hour = -1;
+		}
 		s_minute++;
 		if (s_minute == 10)
 		{
@@ -32,11 +37,6 @@ void jack_bauer(void)
 		{
 			s_hour++;
 			f_minute = 0;
-		}
-		if (s_hour == 9)
-		{
-			f_hour++;
-			s_hour = 0;
 		}
 	}
 }
