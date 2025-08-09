@@ -25,7 +25,8 @@ int power(int base, int exponent)
  */
 void print_number(int n)
 {
-	int c, i;
+	unsigned int c;
+	int i;
 
 	if (n < 0)
 	{
