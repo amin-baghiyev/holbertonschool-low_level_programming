@@ -13,8 +13,8 @@ int main(void)
 	i = 0;
 	prev = 1;
 	curr = 2;
-	printf("%d, ", prev);
-	printf("%d, ", curr);
+	printf("%ld, ", prev);
+	printf("%ld, ", curr);
 	while (i < 48)
 	{
 		curr = curr + prev;
