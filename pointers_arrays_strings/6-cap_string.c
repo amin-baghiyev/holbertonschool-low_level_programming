@@ -10,7 +10,10 @@ char *cap_string(char *s)
 {
 	unsigned int i;
 
-	i = 0;
+	if (s[0] >= 'a' && s[0] <= 'z')
+		s[0] -= 32;
+
+	i = 1;
 	while (s[i] != '\0')
 	{
 		if ((s[i] >= 97 && s[i] <= 122) &&
