@@ -10,7 +10,7 @@
  */
 char *_strncat(char *dest, char *src, int n)
 {
-	unsigned long i, j;
+	int i, j;
 	char flag;
 
 	i = 0;
