@@ -28,6 +28,9 @@ int _atoi(char *s)
 	}
 
 	result = 0;
+	if (left_i < 0 || right_i < 0)
+		return (result);
+
 	i = 1;
 	while (left_i != right_i + 1)
 	{
