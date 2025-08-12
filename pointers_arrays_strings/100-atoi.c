@@ -8,7 +8,8 @@
  */
 int _atoi(char *s)
 {
-	int left_i, right_i, i, result;
+	int left_i, right_i, result;
+	unsigned int i;
 	short sign;
 
 	i = 0;
@@ -38,6 +39,5 @@ int _atoi(char *s)
 		i *= 10;
 	}
 
-	result *= (sign < 0 ? -1 : 1);
-	return (result);
+	return (result < 0 ? result : result * sign);
 }
