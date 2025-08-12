@@ -7,7 +7,7 @@
  *
  * Return: an integer indicating which string is greater
  */
-int *_strcmp(char *s1, char *s2)
+int _strcmp(char *s1, char *s2)
 {
 	unsigned long i;
 
