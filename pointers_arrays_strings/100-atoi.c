@@ -8,18 +8,17 @@
  */
 int _atoi(char *s)
 {
-	int left_i, right_i, i, sign, result;
+	int left_i, right_i, i, result;
+	short sign;
 
 	i = 0;
-	sign = 0;
+	sign = 1;
 	left_i = -1;
 	right_i = -1;
 	while (s[i] != '\0' && !(left_i > 0 && (s[i] < 48 || s[i] > 57)))
 	{
-		if (s[i] == 43 && left_i < 0)
-			sign++;
-		else if (s[i] == 45 && left_i < 0)
-			sign--;
+		if (s[i] == 45 && left_i < 0)
+			sign *= -1;
 		if (left_i < 0 && (s[i] >= 48 && s[i] <= 57))
 			left_i = i;
 		if (left_i >= 0 && (s[i] >= 48 && s[i] <= 57))
