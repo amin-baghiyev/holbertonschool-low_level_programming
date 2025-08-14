@@ -49,5 +49,5 @@ char *infinite_add(char *n1, char *n2, char *r, int size_r)
 			r[i - 1] = '1';
 		r[i] = sum % 10 + 48;
 	}
-	return (r);
+	return (r[i] == 48 ? r + 1 : r);
 }
