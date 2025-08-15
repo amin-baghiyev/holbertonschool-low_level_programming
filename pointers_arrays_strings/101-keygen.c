@@ -8,10 +8,10 @@
  * Return: always 0 (Success)
  */
 int main(void) {
-	srand(time(NULL));
 	unsigned short sum, c;
 
 	sum = 0;
+	srand(time(NULL));
 	while (sum < 2772)
 	{
 		c = 33 + rand() % 93;
