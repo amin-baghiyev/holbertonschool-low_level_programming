@@ -39,7 +39,7 @@ int compute(char *s, int i, int j)
  */
 int is_palindrome(char *s)
 {
-	if (s == "")
+	if (*s == '\0')
 		return (1);
 	return (compute(s, 0, _strlen(s) - 1));
 }
