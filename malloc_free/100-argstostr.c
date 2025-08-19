@@ -1,6 +1,6 @@
 #include "main.h"
 #include <stdlib.h>
-
+#include <stdio.h>
 /**
  * _strlen - calculates length of string
  * @s: string to calculate length
@@ -34,7 +34,7 @@ char *argstostr(int ac, char **av)
 
 	total = 1;
 	for (i = 0; i < ac; i++)
-		total += _strlen(*(av + i));
+		total += (_strlen(*(av + i)) + 1);
 
 	str = malloc(total);
 	if (str == NULL)
@@ -48,5 +48,6 @@ char *argstostr(int ac, char **av)
 		str[k++] = '\n';
 	}
 	str[k] = '\0';
+	printf("%d %d\n", total, k);
 	return (str);
 }
