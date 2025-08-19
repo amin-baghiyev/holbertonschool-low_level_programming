@@ -48,6 +48,5 @@ char *argstostr(int ac, char **av)
 		str[k++] = '\n';
 	}
 	str[k] = '\0';
-	printf("%d %d\n", total, k);
 	return (str);
 }
