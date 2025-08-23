@@ -15,18 +15,11 @@ int main(int argc, char *argv[])
 	int len1, len2, len, i, j, mul, sum, *result, start;
 
 	if (argc != 3)
-	{
-		printf("Error\n");
-		exit(98);
-	}
-
+		printf("Error\n"), exit(98);
 	for (i = 1; i < argc; i++)
 		for (j = 0; argv[i][j] != '\0'; j++)
 			if (argv[i][j] < 48 || argv[i][j] > 57)
-			{
-				printf("Error\n");
-				exit(98);
-			}
+				printf("Error\n"), exit(98);
 
 	num1 = argv[1], num2 = argv[2];
 	len1 = strlen(num1), len2 = strlen(num2);
@@ -34,14 +27,9 @@ int main(int argc, char *argv[])
 	result = malloc(sizeof(int) * len);
 
 	if (result == NULL)
-	{
-		printf("Error\n");
-		exit(98);
-	}
-
+		printf("Error\n"), exit(98);
 	for (i = 0; i < len; i++)
 		result[i] = 0;
-
 	for (i = len1 - 1; i >= 0; i--)
 		for (j = len2 - 1; j >= 0; j--)
 		{
@@ -61,8 +49,6 @@ int main(int argc, char *argv[])
 		for (; start < len; start++)
 			putchar(result[start] + '0');
 	putchar('\n');
-
 	free(result);
-
 	return (0);
 }
