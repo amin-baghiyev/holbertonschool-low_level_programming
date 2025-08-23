@@ -12,12 +12,12 @@ char **strtow(char *str)
 	unsigned long i, length, wc;
 	char **words;
 
-	if (str == NULL || *str == '\0')
-		return (NULL);
 	wc = 0;
 	for (i = 0; str[i] != '\0'; i++)
 		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
 			wc++;
+	if (str == NULL || *str == '\0' || wc == 0)
+		return (NULL);
 	words = malloc(sizeof(char *) * (wc + 1));
 	if (words == NULL)
 		return (NULL);
