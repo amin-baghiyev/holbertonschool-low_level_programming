@@ -22,7 +22,11 @@ int main(int argc, char *argv[])
 
 	bytes = (unsigned char *) main;
 	for (i = 0; i < number_of_bytes; i++)
-		printf("%02x ", bytes[i]);
+	{
+		printf("%02x", bytes[i]);
+		if (i != number_of_bytes - 1)
+			printf(" ");
+	}
 	printf("\n");
 	return (0);
 }
