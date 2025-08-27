@@ -1,15 +1,16 @@
 segment .data
-message db 'Hello, World', 0xa
+	message db 'Hello, World', 0xa
 
 segment .text
 	global main
 
 main:
-	mov edx, 13
-	mov ecx, message
-	mov ebx, 1
-	mov eax, 4
-	int 0x80
+	mov rdx, 13
+	mov rsi, message
+	mov rdi, 1
+	mov rax, 1
+	syscall
 
-	mov eax, 1
-	int 0x80
+	mov rax, 60
+	mov rdi, 0
+	syscall
