@@ -67,12 +67,12 @@ int main(int argc, char *argv[])
 
 	if (argc != 3)
 		err_97();
-	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (fd_to == -1)
-		err_99(argv[2]);
 	fd_from = open(argv[1], O_RDONLY);
 	if (fd_from == -1)
-		close_fd(fd_to), err_98(argv[1]);
+		err_98(argv[1]);
+	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (fd_to == -1)
+		close_fd(fd_from), err_99(argv[2]);
 	while ((r_bytes = read(fd_from, buffer, 1024)) > 0)
 	{
 		if (r_bytes == -1)
