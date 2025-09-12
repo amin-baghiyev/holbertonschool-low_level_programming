@@ -40,7 +40,11 @@ int create_file(const char *filename, char *text_content)
 	{
 		number_of_bytes = write(fd, text_content, _strlen(text_content));
 		if (number_of_bytes == -1)
+		{
+			close(fd);
 			return (-1);
+		}
 	}
+	close(fd);
 	return (1);
 }
