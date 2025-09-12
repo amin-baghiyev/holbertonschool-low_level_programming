@@ -39,6 +39,20 @@ void err_99(const char *filename)
 }
 
 /**
+ * close_fd - closes file descriptor
+ * @fd: file descriptor
+ *
+ * Return: void
+ */
+void close_fd(int fd)
+{
+	if (close(fd) != -1)
+		return;
+	dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+	exit(100);
+}
+
+/**
  * main - Entry point
  * @argc: count of argv
  * @argv: arguments
@@ -58,15 +72,15 @@ int main(int argc, char *argv[])
 		err_99(argv[2]);
 	fd_from = open(argv[1], O_RDONLY);
 	if (fd_from == -1)
-		close(fd_to), err_98(argv[1]);
+		close_fd(fd_to), err_98(argv[1]);
 	while ((r_bytes = read(fd_from, buffer, 1024)) > 0)
 	{
+		if (r_bytes == -1)
+			close_fd(fd_from), close_fd(fd_to), err_98(argv[1]);
 		w_bytes = write(fd_to, buffer, r_bytes);
-		if (w_bytes == -1)
-			close(fd_from), close(fd_to), err_99(argv[2]);
+		if (w_bytes != r_bytes)
+			close_fd(fd_from), close_fd(fd_to), err_99(argv[2]);
 	}
-	close(fd_from), close(fd_to);
-	if (r_bytes == -1)
-		err_98(argv[1]);
+	close_fd(fd_from), close_fd(fd_to);
 	return (0);
 }
