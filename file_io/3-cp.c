@@ -48,7 +48,7 @@ void err_99(const char *filename)
 int main(int argc, char *argv[])
 {
 	int fd_from, fd_to;
-	ssize_t number_of_bytes;
+	ssize_t r_bytes, w_bytes;
 	char buffer[1024];
 
 	if (argc != 3)
@@ -59,13 +59,14 @@ int main(int argc, char *argv[])
 	fd_from = open(argv[1], O_RDONLY);
 	if (fd_from == -1)
 		close(fd_to), err_98(argv[1]);
-	while ((number_of_bytes = read(fd_from, buffer, 1024)) > 0)
+	while ((r_bytes = read(fd_from, buffer, 1024)) > 0)
 	{
-		number_of_bytes = write(fd_to, buffer, number_of_bytes);
-		if (number_of_bytes == -1)
+		w_bytes = write(fd_to, buffer, r_bytes);
+		if (w_bytes == -1)
 			close(fd_from), close(fd_to), err_99(argv[2]);
 	}
-
 	close(fd_from), close(fd_to);
+	if (r_bytes == -1)
+		err_98(argv[1]);
 	return (0);
 }
