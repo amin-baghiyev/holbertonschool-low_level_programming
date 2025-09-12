@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 		err_98(argv[1]);
 	r_bytes = read(fd_from, buffer, 1024);
 	if (r_bytes == -1)
-		 close_fd(fd_from), err_98(argv[1]);
+		close_fd(fd_from), err_98(argv[1]);
 	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (fd_to == -1)
 		close_fd(fd_from), err_99(argv[2]);
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 			close_fd(fd_from), close_fd(fd_to), err_99(argv[2]);
 		r_bytes = read(fd_from, buffer, 1024);
 		if (r_bytes == -1)
-			 close_fd(fd_from), close_fd(fd_to), err_98(argv[1]);
+			close_fd(fd_from), close_fd(fd_to), err_98(argv[1]);
 	}
 	close_fd(fd_from), close_fd(fd_to);
 	return (0);
