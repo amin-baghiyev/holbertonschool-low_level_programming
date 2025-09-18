@@ -23,6 +23,11 @@ void hash_table_print(const hash_table_t *ht)
 		if (boolean == 1)
 			printf(", ");
 		printf("'%s': '%s'", ht->array[i]->key, ht->array[i]->value);
+		while (ht->array[i]->next != NULL)
+		{
+			printf(", '%s': '%s'", ht->array[i]->key, ht->array[i]->value);
+			ht->array[i] = ht->array[i]->next;
+		}
 		if (boolean == 0)
 			boolean = 1;
 	}
