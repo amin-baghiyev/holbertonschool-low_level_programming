@@ -32,6 +32,43 @@ shash_table_t *shash_table_create(unsigned long int size)
 }
 
 /**
+ * add_node_in_order - adds element in order to hash table
+ * @ht: hash table
+ * @node: node to add
+ *
+ * Return: 1 if it succeeded, 0 otherwise
+ */
+int add_node_in_order(shash_table_t *ht, shash_node_t *node)
+{
+	shash_node_t *tmp;
+
+	if (ht->shead == NULL)
+		ht->shead = ht->stail = node, node->sprev = node->snext = NULL;
+	else
+	{
+		tmp = ht->shead;
+		while (tmp && strcmp(tmp->key, node->key) < 0)
+			tmp = tmp->snext;
+		if (tmp == ht->shead)
+		{
+			node->snext = ht->shead, node->sprev = NULL;
+			ht->shead->sprev = node, ht->shead = node;
+		}
+		else if (tmp == NULL)
+		{
+			node->sprev = ht->stail, node->snext = NULL;
+			ht->stail->snext = node, ht->stail = node;
+		}
+		else
+		{
+			node->snext = tmp, node->sprev = tmp->sprev;
+			tmp->sprev->snext = node, tmp->sprev = node;
+		}
+	}
+	return (1);
+}
+
+/**
  * shash_table_set - adds an element to the hash table
  * @ht: hash table
  * @key: key
@@ -41,7 +78,7 @@ shash_table_t *shash_table_create(unsigned long int size)
  */
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
-	shash_node_t *node, *tmp;
+	shash_node_t *node;
 	unsigned long int i;
 
 	if (ht == NULL || key == NULL)
@@ -75,32 +112,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		return (0);
 	}
 	node->next = ht->array[i], ht->array[i] = node;
-	if (ht->shead == NULL)
-		ht->shead = node, ht->stail = node;
-	else
-	{
-		tmp = ht->shead;
-		while (tmp != NULL)
-		{
-			if (strcmp(tmp->key, node->key) > 0)
-			{
-				if (tmp->sprev != NULL)
-					tmp->sprev->snext = node;
-				node->sprev = tmp->sprev, tmp->sprev = node;
-				node->snext = tmp;
-				if (tmp == ht->shead)
-					ht->shead = node;
-				break;
-			}
-			tmp = tmp->snext;
-		}
-		if (tmp == NULL)
-		{
-			ht->stail->snext = node, node->sprev = ht->stail;
-			ht->stail = node;
-		}
-	}
-	return (1);
+	return (add_node_in_order(ht, node));
 }
 
 /**
@@ -146,15 +158,6 @@ void shash_table_print(const shash_table_t *ht)
 	node = ht->shead;
 	while (node != NULL)
 	{
-		while (node->next != NULL)
-		{
-			if (boolean == 1)
-				printf(", ");
-			printf("'%s': '%s'", node->key, node->value);
-			node = node->next;
-			if (boolean == 0)
-				boolean = 1;
-		}
 		if (boolean == 1)
 			printf(", ");
 		printf("'%s': '%s'", node->key, node->value);
@@ -183,15 +186,6 @@ void shash_table_print_rev(const shash_table_t *ht)
 	node = ht->stail;
 	while (node != NULL)
 	{
-		while (node->next != NULL)
-		{
-			if (boolean == 1)
-				printf(", ");
-			printf("'%s': '%s'", node->key, node->value);
-			node = node->next;
-			if (boolean == 0)
-				boolean = 1;
-		}
 		if (boolean == 1)
 			printf(", ");
 		printf("'%s': '%s'", node->key, node->value);
